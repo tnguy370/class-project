@@ -6,6 +6,13 @@ Primary  : Random Forest Classifier
 Target   : At_Risk (1 = Exam Score < 65, 0 = otherwise)
 """
 
+import matplotlib
+
+# Added matplotlib.use('Agg') so the script runs without needing a display
+# non-interactive backend — saves figures and generates the 6 PNGs without opening windows
+# I use it when running it on my end, you can uncomment it and use it if you want to run the script without opening figure windows. If you want to see the plots pop up, just leave it commented out.
+# matplotlib.use('Agg')  
+
 import pandas as pd
 import numpy as np
 import matplotlib.pyplot as plt
@@ -292,20 +299,24 @@ plt.show()
 
 
 # 14 RESULTS AND DISCUSSION
-#
+# adapted the discussion section so the values are not hard coded, but reflect the actual resuts from the metrics table (mdf) and feature importance (fi). This way it will always be accurate regardless of changes to the data or models.
 print("\n" + "=" * 60)
 print("14. RESULTS & DISCUSSION")
 print("=" * 60)
-print("""
+top3 = fi.head(3).index.tolist()
+better_accuracy = "Random Forest" if mdf.loc["Random Forest", "Accuracy"] > mdf.loc["Logistic Regression", "Accuracy"] else "Logistic Regression"
+better_recall   = "Logistic Regression" if mdf.loc["Logistic Regression", "Recall"] > mdf.loc["Random Forest", "Recall"] else "Random Forest"
+
+print(f"""
 Key Findings:
-- Random Forest achieves higher overall accuracy (88.2%) and precision (80%).
-- Logistic Regression achieves higher Recall (85.9% vs 61.9%), catching more
+- {better_accuracy} achieves higher overall accuracy ({mdf.loc[better_accuracy, 'Accuracy']:.1f}%) and precision ({mdf.loc[better_accuracy, 'Precision']:.1f}%).
+- {better_recall} achieves higher Recall ({mdf.loc['Logistic Regression', 'Recall']:.1f}% vs {mdf.loc['Random Forest', 'Recall']:.1f}%), catching more
   at-risk students — critical for educational intervention use cases.
-- Both models achieve AUC-ROC > 0.93, indicating strong discriminative ability.
-- Top predictors: Previous_Scores, Attendance, Hours_Studied.
+- Both models achieve AUC-ROC > {mdf['AUC-ROC'].min() / 100:.2f}, indicating strong discriminative ability.
+- Top predictors: {', '.join(top3)}.
 
 Recommendation:
   For school deployment where missing a struggling student is costly,
-  Logistic Regression may be preferred (higher Recall).
+  {better_recall} may be preferred (higher Recall).
   Random Forest is better when fewer false alarms (higher Precision) matter.
 """)
