@@ -320,3 +320,19 @@ Recommendation:
   {better_recall} may be preferred (higher Recall).
   Random Forest is better when fewer false alarms (higher Precision) matter.
 """)
+
+
+# 15. SAVE MODEL
+print("\n" + "=" * 60)
+print("15. SAVING MODEL")
+print("=" * 60)
+
+import joblib
+
+joblib.dump({
+    "model":           rf,
+    "feature_medians": X_train.median().to_dict(),
+    "feature_cols":    list(X.columns),
+}, "model.pkl")
+
+print("Saved model.pkl")

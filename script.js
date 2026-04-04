@@ -63,12 +63,36 @@ form.addEventListener("submit", function (event) {
         return;
     }
 
-    // Run prediction
-    var prediction = predict(attendance, hoursStudied, previousScores, sleepHours);
-    showResult(prediction);
+    // Run prediction via Flask API
+    var predictBtn = document.getElementById("predict-btn");
+    predictBtn.disabled = true;
+    predictBtn.textContent = "Predicting…";
+
+    fetch("/predict", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+            attendance:      attendance,
+            hours_studied:   hoursStudied,
+            previous_scores: previousScores,
+            sleep_hours:     sleepHours,
+        }),
+    })
+    .then(function (res) { return res.json(); })
+    .then(function (data) {
+        showResult(data.prediction, data.probability);
+    })
+    .catch(function () {
+        alert("Could not reach the prediction server. Make sure app.py is running.");
+        hideResult();
+    })
+    .finally(function () {
+        predictBtn.disabled = false;
+        predictBtn.textContent = "Predict";
+    });
 });
 
-// ── Simple rule-based prediction (placeholder for real model) ──
+/* ── Simple rule-based prediction (placeholder for real model) ──
 function predict(attendance, hoursStudied, previousScores, sleepHours) {
     var riskScore = 0;
 
@@ -95,9 +119,10 @@ function predict(attendance, hoursStudied, previousScores, sleepHours) {
 
     return riskScore >= 3 ? "At-Risk" : "Not At-Risk";
 }
+*/
 
 // ── Show / hide result ──
-function showResult(prediction) {
+function showResult(prediction, probability) {
     resultBox.classList.remove("hidden", "at-risk", "not-at-risk");
 
     if (prediction === "At-Risk") {
@@ -106,7 +131,8 @@ function showResult(prediction) {
         resultBox.classList.add("not-at-risk");
     }
 
-    resultText.textContent = "Prediction: " + prediction;
+    var probText = probability !== undefined ? " (" + probability + "% risk)" : "";
+    resultText.textContent = "Prediction: " + prediction + probText;
 }
 
 function hideResult() {
