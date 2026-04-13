@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Performance Predictor</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Student Performance Predictor</h1>
+            <p class="description">
+                This tool predicts whether a student is
+                <strong>At-Risk</strong> or <strong>Not At-Risk</strong>
+                of poor academic performance based on key factors such as
+                attendance, study habits, previous scores, and sleep.
+            </p>
+        </header>
+
+        <form id="prediction-form" class="card">
+            <div class="form-group">
+                <label for="attendance">Attendance (%)
+                    <span class="slider-value" id="attendance-value">75</span>
+                </label>
+                <input type="range" id="attendance" min="0" max="100" value="75">
+            </div>
+
+            <div class="form-group">
+                <label for="hours-studied">Hours Studied (per week)</label>
+                <input type="number" id="hours-studied" min="0" max="168" step="0.5"
+                       placeholder="e.g. 20">
+            </div>
+
+            <div class="form-group">
+                <label for="previous-scores">Previous Scores (%)</label>
+                <input type="number" id="previous-scores" min="0" max="100" step="1"
+                       placeholder="e.g. 72">
+            </div>
+
+            <div class="form-group">
+                <label for="sleep-hours">Sleep Hours (per night)</label>
+                <input type="number" id="sleep-hours" min="0" max="24" step="0.5"
+                       placeholder="e.g. 7">
+            </div>
+
+            <button type="submit" id="predict-btn">Predict</button>
+        </form>
+
+        <div id="result-box" class="result-box hidden">
+            <p id="result-text"></p>
+        </div>
+
+        <section class="card insights">
+            <h2>Key Insights</h2>
+            <ul>
+                <li>Attendance is the most important factor.</li>
+                <li>Study hours and previous scores also impact performance.</li>
+            </ul>
+
+            <div class="chart-wrapper">
+                <h3>Feature Importance</h3>
+                <img src="fig4_feature_importance.png"
+                     alt="Feature Importance Chart">
+            </div>
+        </section>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

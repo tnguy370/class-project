@@ -1,0 +1,201 @@
+/* ── Reset ── */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: "Segoe UI", Arial, sans-serif;
+    background-color: #f0f4f8;
+    color: #333;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    padding: 40px 16px;
+}
+
+.container {
+    width: 100%;
+    max-width: 540px;
+}
+
+/* ── Header ── */
+header {
+    text-align: center;
+    margin-bottom: 28px;
+}
+
+h1 {
+    font-size: 1.8rem;
+    color: #1a1a2e;
+    margin-bottom: 10px;
+}
+
+.description {
+    font-size: 0.95rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+/* ── Card ── */
+.card {
+    background: #fff;
+    padding: 28px 24px;
+    border-radius: 14px;
+    box-shadow: 0 2px 14px rgba(0, 0, 0, 0.07);
+}
+
+/* ── Form ── */
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 600;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+}
+
+.slider-value {
+    font-weight: 700;
+    color: #4a6cf7;
+    font-size: 0.95rem;
+}
+
+.form-group input[type="range"] {
+    width: 100%;
+    accent-color: #4a6cf7;
+    cursor: pointer;
+}
+
+.form-group input[type="number"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 0.95rem;
+    transition: border-color 0.2s;
+}
+
+.form-group input[type="number"]:focus {
+    outline: none;
+    border-color: #4a6cf7;
+}
+
+.form-group input.input-error {
+    border-color: #e74c3c;
+}
+
+#predict-btn {
+    width: 100%;
+    padding: 12px;
+    background-color: #4a6cf7;
+    color: #fff;
+    font-size: 1rem;
+    font-weight: 600;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 4px;
+    transition: background-color 0.2s;
+}
+
+#predict-btn:hover {
+    background-color: #3955d3;
+}
+
+/* ── Result Box ── */
+.result-box {
+    text-align: center;
+    margin-top: 24px;
+    padding: 20px;
+    border-radius: 14px;
+    font-size: 1.15rem;
+    font-weight: 700;
+    transition: opacity 0.3s;
+}
+
+.result-box.hidden {
+    display: none;
+}
+
+.result-box.at-risk {
+    background-color: #fdecea;
+    color: #c0392b;
+    border: 1px solid #e74c3c;
+}
+
+.result-box.not-at-risk {
+    background-color: #eafaf1;
+    color: #1e8449;
+    border: 1px solid #27ae60;
+}
+
+/* ── Insights ── */
+.insights {
+    margin-top: 32px;
+}
+
+.insights h2 {
+    font-size: 1.15rem;
+    margin-bottom: 14px;
+    color: #1a1a2e;
+}
+
+.insights ul {
+    list-style: none;
+    padding: 0;
+    margin-bottom: 20px;
+}
+
+.insights li {
+    position: relative;
+    padding: 8px 0 8px 22px;
+    font-size: 0.92rem;
+    line-height: 1.5;
+    color: #444;
+}
+
+.insights li::before {
+    content: "✦";
+    position: absolute;
+    left: 0;
+    color: #4a6cf7;
+}
+
+/* ── Chart Image ── */
+.chart-wrapper {
+    text-align: center;
+}
+
+.chart-wrapper h3 {
+    font-size: 1rem;
+    color: #1a1a2e;
+    margin-bottom: 12px;
+}
+
+.chart-wrapper img {
+    width: 100%;
+    max-width: 480px;
+    border-radius: 10px;
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* ── Responsive ── */
+@media (max-width: 480px) {
+    body {
+        padding: 24px 10px;
+    }
+
+    h1 {
+        font-size: 1.4rem;
+    }
+
+    .card {
+        padding: 20px 16px;
+    }
+}
