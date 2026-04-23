@@ -41,7 +41,19 @@ print("=" * 60)
 print("1. LOADING DATA")
 print("=" * 60)
 
-df = pd.read_csv("Data/cleaned_dataset.csv")
+df = pd.read_csv("Data/StudentPerformanceFactors.csv")
+
+# --- Basic preprocessing so it works from raw dataset ---
+
+# Drop missing values
+df = df.dropna()
+
+# Create target column if it doesn't exist
+if "At_Risk" not in df.columns:
+    df["At_Risk"] = (df["Exam_Score"] < 65).astype(int)
+
+# Convert categorical columns to numeric
+df = pd.get_dummies(df, drop_first=True)
 print(f"Shape: {df.shape}")
 print(df.head())
 
