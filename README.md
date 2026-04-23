@@ -1,52 +1,3 @@
-# Student Performance Risk Prediction
-
-## What This Project Does
-
-This project predicts whether a student is At-Risk or Not At-Risk using a machine learning model and a small web interface.
-
-## Required Libraries
-
-pandas, numpy, scikit-learn, matplotlib, seaborn, flask, flask-cors, joblib
-
-Install them with:
-
-```bash
-pip install pandas numpy scikit-learn matplotlib seaborn flask flask-cors joblib
-```
-
-## Project Files
-
-- `models.py` trains the model and generates `model.pkl`
-- `app.py` starts the Flask backend
-- `index.html`, `script.js`, and `styles.css` are the frontend files
-- `Data/` contains the dataset files used by the project
-
-## How To Run
-
-1. Open a terminal in the repository root.
-2. If `model.pkl` is missing, run:
-
-```bash
-python models.py
-```
-
-3. Start the app:
-
-```bash
-python app.py
-```
-
-4. Open your browser at:
-
-```text
-http://127.0.0.1:5000
-```
-
-## Notes
-
-- Run `models.py` first if `model.pkl` does not exist.
-- Then run `app.py`.
-- The app depends on the dataset files in `Data/` and the generated `model.pkl`.
 # Project Overview
 
 This project predicts whether a student is At-Risk or Not At-Risk using a machine learning model.
@@ -60,6 +11,13 @@ Install them with:
 ```bash
 pip install pandas numpy scikit-learn matplotlib seaborn flask flask-cors joblib
 ```
+
+## Dataset
+
+Download dataset here:
+https://www.kaggle.com/datasets/lainguyn123/student-performance-factors
+
+After downloading the dataset, create a folder named "Data" containing the dataset CSV file and then place the "Data" folder inside the "source_code" folder
 
 ## How to Run
 
@@ -85,5 +43,5 @@ http://127.0.0.1:5000
 
 - Run `models.py` first and note close each figure so the script can run.
 - `model.pkl` will be generated automatically.
-
+- The dataset is not included in this submission folder.
 
